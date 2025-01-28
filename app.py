@@ -4,12 +4,48 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+import streamlit as st
+
+# Title and Introduction
+st.title("Sleep Health and Lifestyle Dashboard")
+st.write("""
+Welcome to the Sleep Health and Lifestyle Dashboard! This app explores a dataset that contains information about sleep patterns, 
+lifestyle habits, and their impact on overall health. Use the interactive features below to explore the data and gain insights 
+into how sleep and lifestyle factors are interconnected.
+""")
+
 # Load the dataset
 @st.cache_data
 def load_data():
     data = pd.read_csv('Sleep_health_and_lifestyle_dataset.csv')
     return data
 data = load_data()
+
+# Dataset Description
+st.header("Dataset Description")
+st.write("""
+This dataset contains information about sleep patterns, lifestyle habits, and health metrics for individuals. 
+It includes the following key features:
+- **Person ID**: Unique identifier for each individual.
+- **Gender**: Gender of the individual (Male/Female).
+- **Age**: Age of the individual.
+- **Occupation**: Occupation of the individual.
+- **Sleep Duration**: Average sleep duration per day (in hours).
+- **Quality of Sleep**: Quality of sleep rated on a scale (e.g., 1-10).
+- **Physical Activity Level**: Level of physical activity (in minutes per day).
+- **Stress Level**: Stress level rated on a scale (e.g., 1-10).
+- **BMI Category**: Body Mass Index category (e.g., Normal, Overweight).
+- **Blood Pressure**: Blood pressure reading (e.g., 120/80).
+- **Heart Rate**: Resting heart rate (in beats per minute).
+- **Daily Steps**: Number of steps taken per day.
+- **Sleep Disorder**: Presence of sleep disorders (e.g., None, Insomnia, Sleep Apnea).
+""")
+
+# Show the first few rows of the dataset
+st.subheader("Preview of the Dataset")
+st.write(data.head())
+
+
 
 # Load custom CSS using inline CSS
 st.markdown(
@@ -76,3 +112,14 @@ if not numeric_columns.empty:
 else:
     st.write("No numeric columns available for correlation matrix.")
 
+
+st.header("Conclusion")
+st.write("""
+Through this dashboard, we explored the Sleep Health and Lifestyle dataset and uncovered several interesting insights:
+1. **Sleep Duration**: On average, males and females have similar sleep durations, but individual variations exist.
+2. **Stress and Sleep Quality**: Higher stress levels are associated with lower sleep quality, as seen in the scatter plot.
+3. **Sleep Disorders**: Individuals with higher BMI categories (e.g., Overweight, Obese) are more likely to have sleep disorders like Sleep Apnea.
+4. **Physical Activity**: Physical activity levels also play a role in sleep quality and stress management.
+
+This app demonstrates how sleep, lifestyle, and health are interconnected. Feel free to explore the data further using the interactive features!
+""")
